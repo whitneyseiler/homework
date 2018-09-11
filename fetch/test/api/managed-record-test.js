@@ -54,6 +54,7 @@ describe("Records", function() {
   it('should return results filtered by multiple colors', function(done){
     var expected = {"previousPage":null,"nextPage":2,"ids":[5,6,10,11,15,16,17,22,23,24],"open":[{"id":6,"color":"blue","disposition":"open","isPrimary":true},{"id":10,"color":"red","disposition":"open","isPrimary":true},{"id":23,"color":"red","disposition":"open","isPrimary":true},{"id":24,"color":"red","disposition":"open","isPrimary":true}],"closedPrimaryCount":6};
     retrieve({page: 1, colors: ['red', 'blue']}).then(function(output){
+      console.log(retrieve({page: 1, colors: ['red', 'blue']}));
       expect(output).toEqual(expected);
     }).then(done);
   });
