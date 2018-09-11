@@ -7,16 +7,16 @@ window.path = "http://localhost:3000/records";
 function retrieve(options) {
   var params = {};
 
-  //limit is set to 11 for determining last page on line 52, but only ten items per page will be processed
+  //limit is set to 11 for determining last page on line 52
   params.limit = 11;
 
-  //if options exists and includes page property, use as search query, otherwise retrieve page 1
+  //if options includes page property, use as search query, otherwise retrieve page 1
   var page = options && options.page ? options.page : 1;
   
   //set offset to item index at zero-based page number assuming ten items per page
   params.offset = ((page - 1) * (params.limit - 1));
   
-  //if options exists and includes colors property, use as search query, otherwise search all colors
+  //if includes colors property, use as search query, otherwise search all colors
   params['color[]'] = options && options.colors ? options.colors : ["red", "brown", "blue", "yellow", "green"];
 
   //utilize URI library to construct URL
@@ -29,8 +29,6 @@ function retrieve(options) {
     }
   })
   .then(function(payload) {
-    //parse payload into data object and return to retrieve function and pass page number 
-    //to calculate nextPage and previousPage properties
     return parseData(payload, page)
   })
   .catch(function(error) {
